@@ -1,0 +1,63 @@
+/* 
+@color-2 = #72CD7E;
+@color-4 = #477FD2;
+@color-8 = #7DBC36;
+@color-16 = #7DBC36;
+@color-32 = #7DBC36;
+@color-64 = #7DBC36;
+@color-128 = #7DBC36;
+@color-256 = #7DBC36;
+@color-512 = #7DBC36;
+@color-1024 = #7DBC36;
+@color-2048 = #7DBC36;
+ */
+
+/* Cases */
+.td-0 {
+    background-color: antiquewhite;
+    color: antiquewhite;
+}
+/* 2 */
+.td-2 {
+    background-color: #72CD7E;
+}
+/* 4 */
+.td-4 {
+    background-color: #477FD2;
+}
+/* 8 */
+.td-8 {
+    background-color:
+}
+/* 16 */
+.td-16 {
+    background-color:
+}
+/* 32 */
+.td-32 {
+    background-color:
+}
+/* 64 */
+.td-64 {
+    background-color:
+}
+/* 128 */
+.td-128 {
+    background-color:
+}
+/* 256 */
+.td-256 {
+    background-color:
+}
+/* 512 */
+.td-512 {
+    background-color:
+}
+/* 1024 */
+.td-1024 {
+    background-color:
+}
+/* 2048 */
+.td-2048 {
+    background-color:
+}
