@@ -44,10 +44,9 @@
                 if(game.isMergePoss() == false && game.isMovePoss() == false && game.getFreeCases().length == 0){
                     $('#inner-lose').animate({ opacity: 1 }, 1000, function(){});
                 }
-            }
-            
-            else if (game.isWon()) {
-                $('#inner-win').animate({ opacity: 1 }, 1000, function(){});
+                else if (game.isWon()) {
+                    $('#inner-win').animate({ opacity: 1 }, 1000, function(){});
+                }
             }
         })
 
