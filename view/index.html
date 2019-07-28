@@ -6,31 +6,65 @@
     <title> 2048 version Max</title>
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/board.css">
-    <!-- <link rel="stylesheet/less" type="text/css" href="../css/style.less"> -->
+    <!-- <link rel="stylesheet/less" type="text/css" href="../css/board.less"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js"></script> -->
     <!-- <script src="https://kit.fontawesome.com/d010c6ab3d.js"></script> -->
 </head>
 
 <body>
     <div class="main">
-        <!-- Title -->
-        <div class="title">
-            <h1>2048</h1>
+        <div class="container">
+            <!-- Title -->
+            <div class="title">
+                <h1>2048</h1>
+            </div>
+            <!-- Score -->
+            <div class="score-count">
+
+            </div>
+            <div class="restart">
+                <button class="btn-again">New Game</button>
+            </div>  
         </div>
-        <!-- Score -->
-        <!-- Main Rule -->
+        <p>Join the numbers and get to the 2048 tile!</p>
+
         <!-- New Game -->
         <!-- Game Board -->
-        <div class="boardGame">
+        <div id="outer-box">
+            <div class="boardGame">
+            </div>
+            <div id="inner-lose">
+                <p>You lost...<br>
+                    Would you like to start over ?<br>
+                    <button class="btn-again">New Game</button>
+                </p>
+            </div>
+            <div id="inner-win">
+                <p>YOU HAVE WON !!!<br>
+                    Would you like to start over ?<br>
+                    <button class="btn-again">New Game</button>
+                </p>
+                
+            </div>
         </div>
         <!-- How to play -->
+        <p class="game-explanation">
+            <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When
+            two tiles with the same number touch, they <strong>merge into one!</strong>
+        </p>
+        <hr>
+        <p>
+            <strong class="important">Note:</strong> The game on <a href="https://play2048.co/">this site</a> is the
+            original version of 2048.
+        </p>
     </div>
     <script src="../js/board.js"></script>
     <script src="../js/Base2048.js"></script>
     <script>
-    $('.boardGame').game2048(4);
+        $('.boardGame').game2048(4);
     </script>
+    <script src="../js/restart.js"></script>
+    <script src="../js/blockArrowScroll.js"></script>
 </body>
 
 </html>
