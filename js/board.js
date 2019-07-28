@@ -2,6 +2,7 @@ class Board {
 
 
     constructor(size) {
+        this.score = 0;
         this.table_data = [];
         this.size = size;
         var table_body = '<table>';
@@ -18,6 +19,10 @@ class Board {
         }
         table_body += '</table>';
         $('.boardGame').append(table_body);
+    }
+
+    getScore(){
+        return this.score;
     }
 
     randomIntFromInterval(min, max) {
@@ -39,25 +44,36 @@ class Board {
     generateBoardCase() {
         var free_cases = this.getFreeCases();
         var size_free_cases = free_cases.length;
-        console.log(free_cases);
-        console.log('size_free_cases' + size_free_cases);
+        // console.log(free_cases);
+        // console.log('size_free_cases' + size_free_cases);
 
         var random_case_coord = this.randomIntFromInterval(0, size_free_cases - 1);
         var row = free_cases[random_case_coord][0];
-        var y = free_cases[random_case_coord][1];
-
-        console.log(random_case_coord);
-        console.log(free_cases[random_case_coord]);
-        console.log(row);
-        console.log(y);
+        var col = free_cases[random_case_coord][1];
+        var x = row + 1;
+        var y = col + 1;
+        // console.log(random_case_coord);
+        // console.log(free_cases[random_case_coord]);
+        // console.log(row);
+        // console.log(y);
 
         if (this.randomIntFromInterval(1, 10) < 4) {
-            console.log('done4');
-            this.table_data[row][y] = 4;
+            // console.log('done4');
+            this.table_data[row][col] = 4;
+            $('#' + x + '-' + y).removeClass();
+            $('#' + x + '-' + y).css({opacity:0});
+            $('#' + x + '-' + y).text(this.table_data[row][col]);
+            $('#' + x + '-' + y).addClass('td-' + this.table_data[row][col]);
+            $('#' + x + '-' + y).animate({opacity: 1}, 500, function(){});
             // console.log('case' + row + y + '=' + this.table_data[row][y]);
         } else {
             // console.log('done2');
-            this.table_data[row][y] = 2;
+            this.table_data[row][col] = 2;
+            $('#' + x + '-' + y).removeClass();
+            $('#' + x + '-' + y).css({opacity:0});
+            $('#' + x + '-' + y).text(this.table_data[row][col]);
+            $('#' + x + '-' + y).addClass('td-' + this.table_data[row][col]);
+            $('#' + x + '-' + y).animate({opacity: 1}, 500, function(){});
             // console.log('case' + row + y + '=' + this.table_data[row][y]);
         }
 
@@ -66,6 +82,7 @@ class Board {
     refreshBoard() {
         // console.log('inside refresh');
         $('td').removeClass();
+        $('.score-count').html('Score:<br>' + this.score);
         for (var row = 0; row < this.size; ++row) {
             var x = row + 1;
             for (var col = 0; col < this.size; ++col) {
@@ -154,27 +171,30 @@ class Board {
     };
 
     // MERGE FUNCTIONS
-    mergeUp(){
+    mergeUp() {
         this.mergeOk = false;
         for (var col = 3; col >= 0; col--) {
             for (var row = 0; row < this.size; row++) {
                 var next_row1 = row + 1;
                 var next_row2 = row + 2;
                 var next_row3 = row + 3;
-                if(this.table_data[row][col] !== 0){
-                    if(next_row1 <= 3 && this.table_data[row][col] === this.table_data[next_row1][col]){
+                if (this.table_data[row][col] !== 0) {
+                    if (next_row1 <= 3 && this.table_data[row][col] === this.table_data[next_row1][col]) {
                         this.table_data[row][col] += this.table_data[next_row1][col];
                         this.table_data[next_row1][col] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_row2 <= 3 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0 ){
+                    else if (next_row2 <= 3 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0) {
                         this.table_data[row][col] += this.table_data[next_row2][col];
                         this.table_data[next_row2][col] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_row3 <= 3 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0){
+                    else if (next_row3 <= 3 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0) {
                         this.table_data[row][col] += this.table_data[next_row3][col];
                         this.table_data[next_row3][col] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
                 }
@@ -182,27 +202,30 @@ class Board {
         }
     }
 
-    mergeDown(){
+    mergeDown() {
         this.mergeOk = false;
         for (var col = 0; col < this.size; col++) {
-            for (var row = 3; row >= 0 ; row--) {
+            for (var row = 3; row >= 0; row--) {
                 var next_row1 = row - 1;
                 var next_row2 = row - 2;
                 var next_row3 = row - 3;
-                if(this.table_data[row][col] !== 0){
-                    if(next_row1 >= 0 && this.table_data[row][col] === this.table_data[next_row1][col]){
+                if (this.table_data[row][col] !== 0) {
+                    if (next_row1 >= 0 && this.table_data[row][col] === this.table_data[next_row1][col]) {
                         this.table_data[row][col] += this.table_data[next_row1][col];
                         this.table_data[next_row1][col] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_row2 >= 0 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0 ){
+                    else if (next_row2 >= 0 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0) {
                         this.table_data[row][col] += this.table_data[next_row2][col];
                         this.table_data[next_row2][col] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_row3 >= 0 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0){
+                    else if (next_row3 >= 0 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0) {
                         this.table_data[row][col] += this.table_data[next_row3][col];
                         this.table_data[next_row3][col] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
                 }
@@ -210,27 +233,30 @@ class Board {
         }
     }
 
-    mergeLeft(){
+    mergeLeft() {
         this.mergeOk = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 0; col < this.size; col++) {
                 var next_col1 = col + 1;
                 var next_col2 = col + 2;
                 var next_col3 = col + 3;
-                if(this.table_data[row][col] !== 0){
-                    if(next_col1 <= 3 && this.table_data[row][col] === this.table_data[row][next_col1]){
+                if (this.table_data[row][col] !== 0) {
+                    if (next_col1 <= 3 && this.table_data[row][col] === this.table_data[row][next_col1]) {
                         this.table_data[row][col] += this.table_data[row][next_col1];
                         this.table_data[row][next_col1] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_col2 <= 3 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0 ){
+                    else if (next_col2 <= 3 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0) {
                         this.table_data[row][col] += this.table_data[row][next_col2];
                         this.table_data[row][next_col2] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_col3 <= 3 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0){
+                    else if (next_col3 <= 3 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0) {
                         this.table_data[row][col] += this.table_data[row][next_col3];
                         this.table_data[row][next_col3] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
                 }
@@ -238,27 +264,30 @@ class Board {
         }
     }
 
-    mergeRight(){
+    mergeRight() {
         this.mergeOk = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 3; col >= 0; col--) {
                 var next_col1 = col - 1;
                 var next_col2 = col - 2;
                 var next_col3 = col - 3;
-                if(this.table_data[row][col] !== 0){
-                    if(next_col1 >= 0 && this.table_data[row][col] === this.table_data[row][next_col1]){
+                if (this.table_data[row][col] !== 0) {
+                    if (next_col1 >= 0 && this.table_data[row][col] === this.table_data[row][next_col1]) {
                         this.table_data[row][col] += this.table_data[row][next_col1];
                         this.table_data[row][next_col1] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_col2 >= 0 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0 ){
+                    else if (next_col2 >= 0 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0) {
                         this.table_data[row][col] += this.table_data[row][next_col2];
                         this.table_data[row][next_col2] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
-                    else if(next_col3 >= 0 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0){
+                    else if (next_col3 >= 0 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0) {
                         this.table_data[row][col] += this.table_data[row][next_col3];
                         this.table_data[row][next_col3] = 0;
+                        this.score += this.table_data[row][col];
                         this.mergeOk = true;
                     }
                 }
@@ -267,14 +296,14 @@ class Board {
     }
 
     // VERIF MOVE FUNCTIONS
-    isMovePoss(){
-        if(this.isMoveLeft() || this.isMoveRight() || this.isMoveUp() || this.isMoveDown())
+    isMovePoss() {
+        if (this.isMoveLeft() || this.isMoveRight() || this.isMoveUp() || this.isMoveDown())
             return true;
         else
             return false;
     }
-    
-    isMoveRight(){
+
+    isMoveRight() {
         var returned = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 3; col >= 0; col--) {
@@ -291,7 +320,7 @@ class Board {
         return returned;
     }
 
-    isMoveLeft(){
+    isMoveLeft() {
         var returned = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 0; col < this.size; col++) {
@@ -308,7 +337,7 @@ class Board {
         return returned;
     }
 
-    isMoveUp(){
+    isMoveUp() {
         var returned = false;
         for (var col = 0; col < this.size; col++) {
             for (var row = 0; row < this.size; row++) {
@@ -325,7 +354,7 @@ class Board {
         return returned;
     }
 
-    isMoveDown(){
+    isMoveDown() {
         var returned = false;
         for (var col = 3; col >= 0; col--) {
             for (var row = 0; row < this.size; row++) {
@@ -343,4 +372,117 @@ class Board {
     }
 
     // VERIF MERGE FUNCTIONS
+    isMergePoss() {
+        if (this.isMergeLeft() || this.isMergeRight() || this.isMergeUp() || this.isMergeDown())
+            return true;
+        else
+            return false;
+    }
+
+    isMergeUp() {
+        for (var col = 3; col >= 0; col--) {
+            for (var row = 0; row < this.size; row++) {
+                var next_row1 = row + 1;
+                var next_row2 = row + 2;
+                var next_row3 = row + 3;
+                if (this.table_data[row][col] !== 0) {
+                    if (next_row1 <= 3 && this.table_data[row][col] === this.table_data[next_row1][col]) {
+                        return true;
+                    }
+                    else if (next_row2 <= 3 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0) {
+                        return true;
+                    }
+                    else if (next_row3 <= 3 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    isMergeDown() {
+        for (var col = 0; col < this.size; col++) {
+            for (var row = 3; row >= 0; row--) {
+                var next_row1 = row - 1;
+                var next_row2 = row - 2;
+                var next_row3 = row - 3;
+                if (this.table_data[row][col] !== 0) {
+                    if (next_row1 >= 0 && this.table_data[row][col] === this.table_data[next_row1][col]) {
+                        return true;
+                    }
+                    else if (next_row2 >= 0 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0) {
+                        return true;
+                    }
+                    else if (next_row3 >= 0 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    isMergeLeft() {
+        for (var row = 0; row < this.size; row++) {
+            for (var col = 0; col < this.size; col++) {
+                var next_col1 = col + 1;
+                var next_col2 = col + 2;
+                var next_col3 = col + 3;
+                if (this.table_data[row][col] !== 0) {
+                    if (next_col1 <= 3 && this.table_data[row][col] === this.table_data[row][next_col1]) {
+                        return true;
+                    }
+                    else if (next_col2 <= 3 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0) {
+                        return true;
+                    }
+                    else if (next_col3 <= 3 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    isMergeRight() {
+        for (var row = 0; row < this.size; row++) {
+            for (var col = 3; col >= 0; col--) {
+                var next_col1 = col - 1;
+                var next_col2 = col - 2;
+                var next_col3 = col - 3;
+                if (this.table_data[row][col] !== 0) {
+                    if (next_col1 >= 0 && this.table_data[row][col] === this.table_data[row][next_col1]) {
+                        return true;
+                    }
+                    else if (next_col2 >= 0 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0) {
+                        return true;
+                    }
+                    else if (next_col3 >= 0 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    isWon() {
+        for (var row = 0; row < this.size; ++row) {
+            for (var col = 0; col < this.size; ++col) {
+                if (this.table_data[row][col] == 2048) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    restartBoard() {
+        for (var row = 0; row < this.size; ++row) {
+            for (var col = 0; col < this.size; ++col) {
+                this.table_data[row][col] = 0;
+            }
+        }
+    }
 }
