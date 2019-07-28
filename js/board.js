@@ -78,7 +78,7 @@ class Board {
 
     // MOVE FUNCTIONS
     moveUp() {
-        // this.moveOk = false;
+        this.moveOk = false;
         for (var col = 0; col < this.size; col++) {
             for (var row = 0; row < this.size; row++) {
                 var temp = row - 1;
@@ -90,16 +90,16 @@ class Board {
                     var actualPos = this.table_data[row][col];
                     this.table_data[temp][col] = actualPos;
                     this.table_data[row][col] = 0;
-                    // this.moveOk = true;
+                    this.moveOk = true;
                 };
             };
         };
     };
 
     moveDown() {
-        // this.moveOk = false;
+        this.moveOk = false;
         for (var col = 3; col >= 0; col--) {
-            for (var row = 0; row < this.size; row++) {
+            for (var row = 3; row >= 0; row--) {
                 var temp = row + 1;
                 while (temp <= 3 && this.table_data[temp][col] == 0) {
                     temp++;
@@ -109,14 +109,14 @@ class Board {
                     var actualPos = this.table_data[row][col];
                     this.table_data[temp][col] = actualPos;
                     this.table_data[row][col] = 0;
-                    // this.moveOk = true;
+                    this.moveOk = true;
                 };
             };
         };
     };
 
     moveLeft() {
-        // this.moveOk = false;
+        this.moveOk = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 0; col < this.size; col++) {
                 var temp = col - 1;
@@ -128,14 +128,14 @@ class Board {
                     var actualPos = this.table_data[row][col];
                     this.table_data[row][temp] = actualPos;
                     this.table_data[row][col] = 0;
-                    // this.moveOk = true;
+                    this.moveOk = true;
                 };
             };
         };
     };
 
     moveRight() {
-        // this.moveOk = false;
+        this.moveOk = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 3; col >= 0; col--) {
                 var temp = col + 1;
@@ -147,7 +147,7 @@ class Board {
                     var actualPos = this.table_data[row][col];
                     this.table_data[row][temp] = actualPos;
                     this.table_data[row][col] = 0;
-                    // this.moveOk = true;
+                    this.moveOk = true;
                 };
             };
         };
@@ -155,7 +155,7 @@ class Board {
 
     // MERGE FUNCTIONS
     mergeUp(){
-        // this.mergeOk = false;
+        this.mergeOk = false;
         for (var col = 3; col >= 0; col--) {
             for (var row = 0; row < this.size; row++) {
                 var next_row1 = row + 1;
@@ -165,17 +165,17 @@ class Board {
                     if(next_row1 <= 3 && this.table_data[row][col] === this.table_data[next_row1][col]){
                         this.table_data[row][col] += this.table_data[next_row1][col];
                         this.table_data[next_row1][col] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                     else if(next_row2 <= 3 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0 ){
                         this.table_data[row][col] += this.table_data[next_row2][col];
                         this.table_data[next_row2][col] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                     else if(next_row3 <= 3 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0){
                         this.table_data[row][col] += this.table_data[next_row3][col];
                         this.table_data[next_row3][col] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                 }
             }
@@ -183,7 +183,7 @@ class Board {
     }
 
     mergeDown(){
-        // this.mergeOk = false;
+        this.mergeOk = false;
         for (var col = 0; col < this.size; col++) {
             for (var row = 3; row >= 0 ; row--) {
                 var next_row1 = row - 1;
@@ -193,17 +193,17 @@ class Board {
                     if(next_row1 >= 0 && this.table_data[row][col] === this.table_data[next_row1][col]){
                         this.table_data[row][col] += this.table_data[next_row1][col];
                         this.table_data[next_row1][col] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                     else if(next_row2 >= 0 && this.table_data[row][col] === this.table_data[next_row2][col] && this.table_data[next_row1][col] === 0 ){
                         this.table_data[row][col] += this.table_data[next_row2][col];
                         this.table_data[next_row2][col] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                     else if(next_row3 >= 0 && this.table_data[row][col] === this.table_data[next_row3][col] && this.table_data[next_row1][col] === 0 && this.table_data[next_row2][col] === 0){
                         this.table_data[row][col] += this.table_data[next_row3][col];
                         this.table_data[next_row3][col] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                 }
             }
@@ -211,7 +211,7 @@ class Board {
     }
 
     mergeLeft(){
-        // this.mergeOk = false;
+        this.mergeOk = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 0; col < this.size; col++) {
                 var next_col1 = col + 1;
@@ -219,19 +219,19 @@ class Board {
                 var next_col3 = col + 3;
                 if(this.table_data[row][col] !== 0){
                     if(next_col1 <= 3 && this.table_data[row][col] === this.table_data[row][next_col1]){
-                        this.table_data[row][next_col1] += this.table_data[row][col];
-                        this.table_data[row][col] = 0;
-                        // this.mergeOk = true;
+                        this.table_data[row][col] += this.table_data[row][next_col1];
+                        this.table_data[row][next_col1] = 0;
+                        this.mergeOk = true;
                     }
                     else if(next_col2 <= 3 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0 ){
-                        this.table_data[row][next_col2] += this.table_data[row][col];
-                        this.table_data[row][col] = 0;
-                        // this.mergeOk = true;
+                        this.table_data[row][col] += this.table_data[row][next_col2];
+                        this.table_data[row][next_col2] = 0;
+                        this.mergeOk = true;
                     }
                     else if(next_col3 <= 3 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0){
-                        this.table_data[row][next_col3] += this.table_data[row][col];
-                        this.table_data[row][col] = 0;
-                        // this.mergeOk = true;
+                        this.table_data[row][col] += this.table_data[row][next_col3];
+                        this.table_data[row][next_col3] = 0;
+                        this.mergeOk = true;
                     }
                 }
             }
@@ -239,7 +239,7 @@ class Board {
     }
 
     mergeRight(){
-        // this.mergeOk = false;
+        this.mergeOk = false;
         for (var row = 0; row < this.size; row++) {
             for (var col = 3; col >= 0; col--) {
                 var next_col1 = col - 1;
@@ -249,61 +249,98 @@ class Board {
                     if(next_col1 >= 0 && this.table_data[row][col] === this.table_data[row][next_col1]){
                         this.table_data[row][col] += this.table_data[row][next_col1];
                         this.table_data[row][next_col1] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                     else if(next_col2 >= 0 && this.table_data[row][col] === this.table_data[row][next_col2] && this.table_data[row][next_col1] === 0 ){
                         this.table_data[row][col] += this.table_data[row][next_col2];
                         this.table_data[row][next_col2] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                     else if(next_col3 >= 0 && this.table_data[row][col] === this.table_data[row][next_col3] && this.table_data[row][next_col2] === 0 && this.table_data[row][next_col1] === 0){
                         this.table_data[row][col] += this.table_data[row][next_col3];
                         this.table_data[row][next_col3] = 0;
-                        // this.mergeOk = true;
+                        this.mergeOk = true;
                     }
                 }
             }
         }
     }
 
+    // VERIF MOVE FUNCTIONS
+    isMovePoss(){
+        if(this.isMoveLeft() || this.isMoveRight() || this.isMoveUp() || this.isMoveDown())
+            return true;
+        else
+            return false;
+    }
+    
+    isMoveRight(){
+        var returned = false;
+        for (var row = 0; row < this.size; row++) {
+            for (var col = 3; col >= 0; col--) {
+                var temp = col + 1;
+                while (temp <= 3 && this.table_data[row][temp] == 0) {
+                    temp++;
+                }
+                temp--;
+                if (this.table_data[row][col] !== 0 && this.table_data[row][temp] === 0 && temp <= 3) {
+                    returned = true;
+                }
+            };
+        };
+        return returned;
+    }
 
+    isMoveLeft(){
+        var returned = false;
+        for (var row = 0; row < this.size; row++) {
+            for (var col = 0; col < this.size; col++) {
+                var temp = col - 1;
+                while (temp >= 0 && this.table_data[row][temp] == 0) {
+                    temp--;
+                }
+                temp++;
+                if (this.table_data[row][col] !== 0 && this.table_data[row][temp] === 0 && temp >= 0) {
+                    returned = true;
+                };
+            };
+        };
+        return returned;
+    }
+
+    isMoveUp(){
+        var returned = false;
+        for (var col = 0; col < this.size; col++) {
+            for (var row = 0; row < this.size; row++) {
+                var temp = row - 1;
+                while (temp >= 0 && this.table_data[temp][col] == 0) {
+                    temp--;
+                }
+                temp++;
+                if (this.table_data[row][col] !== 0 && this.table_data[temp][col] === 0 && temp >= 0) {
+                    returned = true;
+                };
+            };
+        };
+        return returned;
+    }
+
+    isMoveDown(){
+        var returned = false;
+        for (var col = 3; col >= 0; col--) {
+            for (var row = 0; row < this.size; row++) {
+                var temp = row + 1;
+                while (temp <= 3 && this.table_data[temp][col] == 0) {
+                    temp++;
+                }
+                temp--;
+                if (this.table_data[row][col] !== 0 && this.table_data[temp][col] === 0 && temp <= 3) {
+                    returned = true;
+                };
+            };
+        };
+        return returned;
+    }
+
+    // VERIF MERGE FUNCTIONS
 }
-
-
-// var Board = new Board(4);
-
-// moveUp() {
-//     var x = 0;
-//     var a = 1;
-//     var y = 0;
-//     while (y < this.size) {
-//         while (row < this.size) {
-//             // console.log(this.table_data[row][y]);
-//             if (this.table_data[row][y] == 0 && (a) < 4) {
-//                 var temp = this.table_data[row][y];
-//                 this.table_data[row][y] = this.table_data[a][y];
-//                 this.table_data[a][y] = temp;
-//             }
-//             a++;
-//             row++;
-//         }
-//         y++
-//     }
-// }
-
-// function moveLeft() {
-//     for (var row = 0; row < this.size; row++) {
-//         for (var y = 0; y < this.size; y++) {
-//             var temp = y - 1;
-//             while (temp >= 0 && this.table_data[row][temp] == 0) {
-//                 temp--;
-//             }
-//             temp++;
-//             if (this.table_data[row][y] !== 0 && this.table_data[row][temp] === 0 && temp >= 0) {
-//                 var actualPos = this.table_data[row][y];
-//                 this.table_data[row][temp] = actualPos;
-//                 this.table_data[row][y] = 0;
-//             };
-//         };
-//     };
-// };
