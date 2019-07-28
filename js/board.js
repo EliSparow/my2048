@@ -57,7 +57,7 @@ class Board {
         // console.log(row);
         // console.log(y);
 
-        if (this.randomIntFromInterval(1, 10) < 4) {
+        if (this.randomIntFromInterval(1, 10) < 3) {
             // console.log('done4');
             this.table_data[row][col] = 4;
             $('#' + x + '-' + y).removeClass();
@@ -466,7 +466,7 @@ class Board {
         }
         return false;
     }
-
+    // ------------------
     isWon() {
         for (var row = 0; row < this.size; ++row) {
             for (var col = 0; col < this.size; ++col) {
@@ -479,6 +479,7 @@ class Board {
     }
 
     restartBoard() {
+        this.score = 0;
         for (var row = 0; row < this.size; ++row) {
             for (var col = 0; col < this.size; ++col) {
                 this.table_data[row][col] = 0;
