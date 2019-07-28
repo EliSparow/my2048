@@ -1,0 +1,66 @@
+$color-2 : #fff8a0;
+$color-4 : #fff272;
+$color-8 : #f39731;
+$color-16 :#f0827b;
+$color-32 : #e392d4;
+$color-64: #ad90bb;
+$color-128 : #ec5097;
+$color-256 : #d1e842;
+$color-512 : #68e5c4;
+$color-1024 : #4dac87;
+$color-2048 : #75f161;
+
+$text-color-dark: grey;
+$text-color-light: antiquewhite;
+
+
+/* Cases */
+.td-0 {
+    background-color: antiquewhite;
+    color: antiquewhite;
+}
+/* 2 */
+.td-2 {
+    background-color: $color-2;
+    color: $text-color-dark;
+}
+/* 4 */
+.td-4 {
+    background-color: $color-4;
+}
+/* 8 */
+.td-8 {
+    background-color: $color-8;
+}
+/* 16 */
+.td-16 {
+    background-color:$color-16;
+}
+/* 32 */
+.td-32 {
+    background-color: $color-32;
+}
+/* 64 */
+.td-64 {
+    background-color: $color-64;
+}
+/* 128 */
+.td-128 {
+    background-color: $color-128;
+}
+/* 256 */
+.td-256 {
+    background-color: $color-256;
+}
+/* 512 */
+.td-512 {
+    background-color: $color-512;
+}
+/* 1024 */
+.td-1024 {
+    background-color: $color-1024;
+}
+/* 2048 */
+.td-2048 {
+    background-color: $color-2048;
+}

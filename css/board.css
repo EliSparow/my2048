@@ -1,63 +1,52 @@
-/* 
-@color-2 = #72CD7E;
-@color-4 = #477FD2;
-@color-8 = #7DBC36;
-@color-16 = #7DBC36;
-@color-32 = #7DBC36;
-@color-64 = #7DBC36;
-@color-128 = #7DBC36;
-@color-256 = #7DBC36;
-@color-512 = #7DBC36;
-@color-1024 = #7DBC36;
-@color-2048 = #7DBC36;
- */
-
 /* Cases */
 .td-0 {
-    background-color: antiquewhite;
-    color: antiquewhite;
-}
+  background-color: antiquewhite;
+  color: antiquewhite; }
+
 /* 2 */
 .td-2 {
-    background-color: #72CD7E;
-}
+  box-shadow: inset 0 0 10px #fdb5fe;
+  background: linear-gradient(283deg, rgba(218,206,39,1) 0%, rgba(218,166,39,1) 100%);
+  color: black; }
+
 /* 4 */
 .td-4 {
-    background-color: #477FD2;
-}
+  background-color: #fff272; }
+
 /* 8 */
 .td-8 {
-    background-color:
-}
+  background-color: #f39731; }
+
 /* 16 */
 .td-16 {
-    background-color:
-}
+  background-color: #f0827b; }
+
 /* 32 */
 .td-32 {
-    background-color:
-}
+  background-color: #e392d4; }
+
 /* 64 */
 .td-64 {
-    background-color:
-}
+  background-color: #ad90bb; }
+
 /* 128 */
 .td-128 {
-    background-color:
-}
+  background-color: #ec5097; }
+
 /* 256 */
 .td-256 {
-    background-color:
-}
+  background-color: #d1e842; }
+
 /* 512 */
 .td-512 {
-    background-color:
-}
+  background-color: #68e5c4; }
+
 /* 1024 */
 .td-1024 {
-    background-color:
-}
+  background-color: #4dac87; }
+
 /* 2048 */
 .td-2048 {
-    background-color:
-}
+  background-color: #75f161; }
+
+/*# sourceMappingURL=board.css.map */
