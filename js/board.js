@@ -19,15 +19,16 @@ class Board {
         }
         table_body += '</table>';
         $('.boardGame').append(table_body);
-    }
+        // this.attr().append(table_body);
+    };
 
     getScore(){
         return this.score;
-    }
+    };
 
     randomIntFromInterval(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
-    }
+    };
 
     getFreeCases() {
         var freeCases = [];
@@ -39,7 +40,7 @@ class Board {
             }
         }
         return freeCases;
-    }
+    };
 
     generateBoardCase() {
         var free_cases = this.getFreeCases();
@@ -77,7 +78,7 @@ class Board {
             // console.log('case' + row + y + '=' + this.table_data[row][y]);
         }
 
-    }
+    };
 
     refreshBoard() {
         // console.log('inside refresh');
@@ -91,7 +92,7 @@ class Board {
                 $('#' + x + '-' + y).addClass('td-' + this.table_data[row][col]);
             }
         }
-    }
+    };
 
     // MOVE FUNCTIONS
     moveUp() {
@@ -200,7 +201,7 @@ class Board {
                 }
             }
         }
-    }
+    };
 
     mergeDown() {
         this.mergeOk = false;
@@ -231,7 +232,7 @@ class Board {
                 }
             }
         }
-    }
+    };
 
     mergeLeft() {
         this.mergeOk = false;
@@ -262,7 +263,7 @@ class Board {
                 }
             }
         }
-    }
+    };
 
     mergeRight() {
         this.mergeOk = false;
@@ -293,7 +294,7 @@ class Board {
                 }
             }
         }
-    }
+    };
 
     // VERIF MOVE FUNCTIONS
     isMovePoss() {
@@ -301,7 +302,7 @@ class Board {
             return true;
         else
             return false;
-    }
+    };
 
     isMoveRight() {
         var returned = false;
@@ -318,7 +319,7 @@ class Board {
             };
         };
         return returned;
-    }
+    };
 
     isMoveLeft() {
         var returned = false;
@@ -335,7 +336,7 @@ class Board {
             };
         };
         return returned;
-    }
+    };
 
     isMoveUp() {
         var returned = false;
@@ -352,7 +353,7 @@ class Board {
             };
         };
         return returned;
-    }
+    };
 
     isMoveDown() {
         var returned = false;
@@ -369,7 +370,7 @@ class Board {
             };
         };
         return returned;
-    }
+    };
 
     // VERIF MERGE FUNCTIONS
     isMergePoss() {
@@ -377,7 +378,7 @@ class Board {
             return true;
         else
             return false;
-    }
+    };
 
     isMergeUp() {
         for (var col = 3; col >= 0; col--) {
@@ -399,7 +400,7 @@ class Board {
             }
         }
         return false;
-    }
+    };
 
     isMergeDown() {
         for (var col = 0; col < this.size; col++) {
@@ -421,7 +422,7 @@ class Board {
             }
         }
         return false;
-    }
+    };
 
     isMergeLeft() {
         for (var row = 0; row < this.size; row++) {
@@ -443,7 +444,7 @@ class Board {
             }
         }
         return false;
-    }
+    };
 
     isMergeRight() {
         for (var row = 0; row < this.size; row++) {
@@ -465,7 +466,8 @@ class Board {
             }
         }
         return false;
-    }
+    };
+
     // ------------------
     isWon() {
         for (var row = 0; row < this.size; ++row) {
@@ -476,7 +478,7 @@ class Board {
             }
         }
         return false;
-    }
+    };
 
     restartBoard() {
         this.score = 0;
@@ -485,5 +487,5 @@ class Board {
                 this.table_data[row][col] = 0;
             }
         }
-    }
+    };
 }
