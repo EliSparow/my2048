@@ -42,10 +42,10 @@
                 // console.log('move poss:' +game.isMovePoss());
                 // console.log('free cases' +game.getFreeCases().length);
                 if(game.isMergePoss() == false && game.isMovePoss() == false && game.getFreeCases().length == 0){
-                    $('#inner-lose').animate({ opacity: 1 }, 1000, function(){});
+                    $('#inner-lose').animate({ opacity: 1 }, 500, function(){});
                 }
                 else if (game.isWon()) {
-                    $('#inner-win').animate({ opacity: 1 }, 1000, function(){});
+                    $('#inner-win').animate({ opacity: 1 }, 500, function(){});
                 }
             }
         })
